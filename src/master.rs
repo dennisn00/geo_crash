@@ -1,16 +1,23 @@
+use crate::player::Player;
+use crate::game_object::GameObject;
+
 pub struct Master{
-    objects: vec<Object>,
+    objects: Vec<GameObject>,
     player: Player,
-    enemies: vec<Enemy>,
+    //enemies: Vec<Enemy>,
 }
 //TODO: implement structs Player and Enemy
 
 impl Master{
-    fn new() -> Self{
+    pub fn new() -> Self{
         //TODO: initialize Master with all Objects
+        Master{
+            objects: Vec::new(),
+            player: Player::new(),
+        }
     }
 
-    fn update(){
+    pub fn update(){
         //TODO: update all Players, Enemies and moving objects
         //TODO: remove objects that are out of screen and spawn new ones
     }

@@ -1,4 +1,12 @@
-use graphics::Viewport;
+extern crate piston_window;
+
+use crate::master::Master;
+use crate::view::View;
+
+mod player;
+mod master;
+mod view;
+mod game_object;
 
 enum GameState{
     Init,
@@ -9,7 +17,7 @@ enum GameState{
 
 pub struct App{
     game_state: GameState,
-    master: Master,
+    pub master: Master,
 }
 
 impl App{
@@ -17,21 +25,22 @@ impl App{
     pub fn new() -> Self {
         App {
             game_state: GameState::Init,
+            master: Master::new(),
         }
     }
 
-    /*this returns a view object coreesponding to the current GameState
-    TODO: implement view for all GameStates */
+    /*this returns a View object coresponding to the current GameState
+    TODO: implement View for all GameStates */
     pub fn view(&self) -> View {
         match self.game_state {
-            GameState::Running {elapsed_time, kills} => View{
+            GameState::Running {elapsed_time, kills} =>
+                View::new(),
 
-            }
-            GameState::Init => {}
-            GameState::Preparing => {}
-            GameState::Death => {}
+            //TODO: return Views for other Gamestats
+            GameState::Init => {View::new()},
+            GameState::Preparing => {View::new()},
+            GameState::Death => {View::new()},
         }
     }
 }
 
-mod view;

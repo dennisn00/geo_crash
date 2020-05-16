@@ -8,7 +8,7 @@ use piston_window::*;
 use geoCrash::App;
 
 static TITLE:&str = "GeoCrash";
-//ik
+
 fn main(){
 
     //create instance of App
@@ -19,9 +19,13 @@ fn main(){
     let mut window: PistonWindow = WindowSettings::new(TITLE,
                                                        [512;2]).build().unwrap();
 
+
     while let Some(e) = window.next(){
-        window.draw_2d(&e, |context, graphics| {
-            //TODO: get app' view and call render function
-        })
+
+        //if event is render, closure f is called, context has information about window size
+        //graphics represents visual state of window
+        window.draw_2d(&e, |context, graphics, _| {
+            app.view().render(context, graphics, &app.master);
+        });
     }
 }
