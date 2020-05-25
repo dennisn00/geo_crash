@@ -1,31 +1,49 @@
-extern crate glutin_window;
-extern crate graphics;
-extern crate opengl_graphics;
-extern crate piston;
-extern crate piston_window;
+use ggez::{Context, ContextBuilder, GameResult};
+use ggez::event::{self, EventHandler};
+use ggez::graphics;
 
-use piston_window::*;
-use geoCrash::App;
+fn main() {
+    // Make a Context and an EventLoop.
+    let (mut ctx, mut event_loop) =
+        ContextBuilder::new("game_name", "author_name")
+            .build()
+            .unwrap();
 
-static TITLE:&str = "GeoCrash";
+    // Create an instance of your event handler.
+    // Usually, you should provide it with the Context object
+    // so it can load resources like images during setup.
+    let mut my_game = MyGame::new(&mut ctx);
 
-fn main(){
+    // Run!
+    match event::run(&mut ctx, &mut event_loop, &mut my_game) {
+        Ok(_) => println!("Exited cleanly."),
+        Err(e) => println!("Error occured: {}", e)
+    }
+}
 
-    //create instance of App
-    let mut app = App::new();
+struct MyGame {
+    master: Master,
+}
 
+impl MyGame {
+    pub fn new(_ctx: &mut Context) -> MyGame {
+        let master = Master::new();
+        MyGame {
+            master,
+        }
+    }
+}
 
-    //create GameWindow
-    let mut window: PistonWindow = WindowSettings::new(TITLE,
-                                                       [512;2]).build().unwrap();
+impl EventHandler for MyGame {
+    fn update(&mut self, _ctx: &mut Context) -> GameResult<()> {
+        // Update code here...
+    }
 
+    fn draw(&mut self, ctx: &mut Context) -> GameResult<()> {
+        graphics::clear(ctx, graphics::WHITE);
 
-    while let Some(e) = window.next(){
+        master.draw(ctx);
 
-        //if event is render, closure f is called, context has information about window size
-        //graphics represents visual state of window
-        window.draw_2d(&e, |context, graphics, _| {
-            app.view().render(context, graphics, &app.master);
-        });
+        graphics::present(ctx)
     }
 }

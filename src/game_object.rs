@@ -1,4 +1,5 @@
 use piston_window::*;
+use ggez::Context;
 
 type Point = (i32, i32);
 
@@ -11,7 +12,7 @@ pub struct GameObject {
 
 impl GameObject {
 
-    fn new() -> Self{
+    pub fn new() -> Self{
         GameObject {
             position: (10,10),
             speed: 0,
@@ -20,7 +21,11 @@ impl GameObject {
         }
     }
 
-    fn render(&mut self, context: Context, graphics: G2d){
+    pub fn update(){
+
+    }
+
+    pub fn draw(&mut self, context: Context){
         //TODO: render Object at current position
     }
 }

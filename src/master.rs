@@ -1,5 +1,6 @@
 use crate::player::Player;
 use crate::game_object::GameObject;
+use ggez::Context;
 
 pub struct Master{
     objects: Vec<GameObject>,
@@ -20,5 +21,9 @@ impl Master{
     pub fn update(){
         //TODO: update all Players, Enemies and moving objects
         //TODO: remove objects that are out of screen and spawn new ones
+    }
+
+    pub fn draw(&self, context: &Context){
+        player.draw(context);
     }
 }
