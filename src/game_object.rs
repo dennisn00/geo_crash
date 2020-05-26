@@ -1,4 +1,3 @@
-use piston_window::*;
 use ggez::Context;
 
 type Point = (i32, i32);

@@ -1,5 +1,11 @@
 use ggez::{graphics, Context, ContextBuilder, GameResult};
 use ggez::event::{self, EventHandler};
+use crate::master::Master;
+use ggez::graphics::DrawParam;
+
+mod master;
+mod player;
+mod game_object;
 
 fn main() {
     // Make a Context.
@@ -20,14 +26,14 @@ fn main() {
 }
 
 struct MyGame {
-    // Your state here...
+    master: Master,
 }
 
 impl MyGame {
     pub fn new(_ctx: &mut Context) -> MyGame {
         // Load/create resources such as images here.
         MyGame {
-            // ...
+            master: Master::new(),
         }
     }
 }
@@ -40,7 +46,8 @@ impl EventHandler for MyGame {
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult<()> {
         graphics::clear(ctx, graphics::WHITE);
-        // Draw code here...
+        let r1 = self.master.draw(ctx)?;
+        graphics::draw(ctx, &r1, DrawParam::default())?;
         graphics::present(ctx)
     }
 }

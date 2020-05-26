@@ -1,6 +1,7 @@
+use ggez::{Context, GameResult};
 use crate::player::Player;
 use crate::game_object::GameObject;
-use ggez::Context;
+use ggez::graphics::Mesh;
 
 pub struct Master{
     objects: Vec<GameObject>,
@@ -23,7 +24,7 @@ impl Master{
         //TODO: remove objects that are out of screen and spawn new ones
     }
 
-    pub fn draw(&self, context: &Context){
-        player.draw(context);
+    pub fn draw(&self, context: &mut Context) -> GameResult<Mesh>{
+        return self.player.draw(context);
     }
 }

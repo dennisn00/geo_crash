@@ -1,14 +1,16 @@
-use graphics::{Context, Drawable};
-use ggez::Context;
+use ggez::graphics::{DrawParam, BlendMode, Mesh};
+use ggez::{graphics, Context, ContextBuilder, GameResult};
+use ggez::event::{self, EventHandler};
 
 pub struct Player{
     //TODO: implement player attributes
 }
 
-impl Drawable for Player{
+/*impl Drawable for Player{
 
-    fn draw(&self, ctx: &mut Context, param: DrawParam){
-
+    fn draw(&self, ctx: &mut Context, param: DrawParam) -> GameState{
+        let rect = graphics::Rect::new(100.0, 100.0, 50.0, 50.0);
+        return rect;
     }
 
     fn dimensions(&self, ctx: &mut Context){
@@ -22,7 +24,7 @@ impl Drawable for Player{
     fn blend_mode(&self){
 
     }
-}
+}*/
 
 impl Player{
 
@@ -31,11 +33,17 @@ impl Player{
         Player{}
     }
 
-    pub fn update(&mut self, context: Context, graphics: G2d){
-        //TODO: render player
+    pub fn update(){
+        //TODO: update player
     }
 
-    pub fn draw(&self, context: &Context){
+    pub fn draw(&self, context: &mut Context) -> GameResult<Mesh>{
 
+        let rect = graphics::Rect::new(100f32, 100f32, 50f32, 50f32);
+        let r1 =
+            graphics::Mesh::new_rectangle(context, graphics::DrawMode::fill(),
+                                          rect, graphics::BLACK)?;
+        return GameResult::Ok(r1);
     }
+
 }
