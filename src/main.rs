@@ -1,17 +1,15 @@
-use ggez::{Context, ContextBuilder, GameResult};
+use ggez::{graphics, Context, ContextBuilder, GameResult};
 use ggez::event::{self, EventHandler};
-use ggez::graphics;
 
 fn main() {
-    // Make a Context and an EventLoop.
-    let (mut ctx, mut event_loop) =
-        ContextBuilder::new("game_name", "author_name")
-            .build()
-            .unwrap();
+    // Make a Context.
+    let (mut ctx, mut event_loop) = ContextBuilder::new("my_game", "Cool Game Author")
+        .build()
+        .expect("aieee, could not create ggez context!");
 
     // Create an instance of your event handler.
-    // Usually, you should provide it with the Context object
-    // so it can load resources like images during setup.
+    // Usually, you should provide it with the Context object to
+    // use when setting your game up.
     let mut my_game = MyGame::new(&mut ctx);
 
     // Run!
@@ -22,14 +20,14 @@ fn main() {
 }
 
 struct MyGame {
-    master: Master,
+    // Your state here...
 }
 
 impl MyGame {
     pub fn new(_ctx: &mut Context) -> MyGame {
-        let master = Master::new();
+        // Load/create resources such as images here.
         MyGame {
-            master,
+            // ...
         }
     }
 }
@@ -37,13 +35,12 @@ impl MyGame {
 impl EventHandler for MyGame {
     fn update(&mut self, _ctx: &mut Context) -> GameResult<()> {
         // Update code here...
+        Ok(())
     }
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult<()> {
         graphics::clear(ctx, graphics::WHITE);
-
-        master.draw(ctx);
-
+        // Draw code here...
         graphics::present(ctx)
     }
 }
